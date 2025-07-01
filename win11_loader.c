@@ -252,10 +252,10 @@ LPVOID find_ShimsEnabledAddress(HANDLE hNtDLL, LPVOID pDllLoadedOffsetAddress) {
     }
 
     if (!dwDataPtr) {
-        printf("[ERROR] .data section not found!\n");
+        printf("[ERROR] .text section not found!\n");
         return NULL;
     }
-    printf("[DEBUG] Scanning .data section from: 0x%p to 0x%p\n", (LPVOID)dwPtr, (LPVOID)dwEndPtr);
+    printf("[DEBUG] Scanning .text section from: 0x%p to 0x%p\n", (LPVOID)dwPtr, (LPVOID)dwEndPtr);
 
     while (dwPtr = (DWORD_PTR) find_pattern((LPBYTE)dwPtr, dwEndPtr - dwPtr, "\x44\x38\x25", 3)) {
     

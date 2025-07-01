@@ -1,0 +1,6 @@
+*.pdb
+*.exe
+*.o
+*.bin
+main.c
+.vscode/
